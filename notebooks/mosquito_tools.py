@@ -17,3 +17,13 @@ def count_repeats(df, columns):
     load_releases.
     """
     return int(df.duplicated(subset=columns, keep=False).sum())
+
+
+def unmatched(left, right, on):
+    """Return the `on` values in `left` that have no row in `right`, sorted.
+
+    Used in: 02-clean, for count days with no weather, and for summers with no
+    spring rain total.
+    """
+    keys = set(right[on])
+    return sorted(v for v in left[on].unique() if v not in keys)
