@@ -27,3 +27,16 @@ def unmatched(left, right, on):
     """
     keys = set(right[on])
     return sorted(v for v in left[on].unique() if v not in keys)
+
+
+def ranked_bars(ax, values, title, xlabel):
+    """Draw `values` (a Series) as horizontal bars on `ax`, largest at the top.
+
+    Used in: chapter 1 and chapter 2 (03-story).
+    From: my A2 report's Q1 chart; the data, title and label are parameters now.
+    """
+    ordered = values.sort_values()
+    ax.barh(ordered.index.astype(str), ordered.values, color="#4a6b8a")
+    ax.set_title(title)
+    ax.set_xlabel(xlabel)
+    return ax
