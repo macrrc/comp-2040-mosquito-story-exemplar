@@ -92,3 +92,22 @@ def key_numbers(seasons, daily, wet_mm, sides):
         "its summer": (f"rank {int(avg.rank(ascending=False)[wettest])}, average {avg[wettest]:.1f}, "
                        f"peak {seasons.loc[wettest, 'peak']:.0f}"),
     }, name="key number")
+
+
+def load_releases(paths, key):
+    """Read every file in `paths`, in order, and stack them into one DataFrame.
+
+    Stops if a `key` combination (for example a date) appears in two files,
+    because then one release overlaps another and would double count.
+
+    Used in: 02-clean, for the trap counts and for the weather.
+    """
+    paths = [Path(p) for p in paths]
+    if not paths:
+        raise FileNotFoundError("No files to read")
+    combined = pd.concat([pd.read_csv(p) for p in paths], ignore_index=True)
+    repeats = count_repeats(combined, key)
+    if repeats > 0:
+        raise ValueError(f"{repeats} rows repeat across files")
+    print(f"{len(paths)} file(s), {len(combined)} rows")
+    return combined
