@@ -1,11 +1,10 @@
 # The Provincial Bird: Is It the Rain?
 
-**Story question:** my A2 report found some Winnipeg summers are many times buggier than others. Which summers
-were the worst, and is a wet spring to blame?
+Winnipeg's worst mosquito summers mostly follow wet springs: four of the five buggiest of
+twelve summers had 150 mm or more of rain in May and June. But 2026, the wettest spring of
+all, made only a middling-to-bad summer: rain is a warning, not a forecast.
 
-Earlier work: `earlier-work/` (Assignment 1, the first look and prep; Assignment 2, the report), as it was.
-
-**Chapters:** (1) Which summers were the worst? (2) When, and where? (3) Is it the rain?
+![Rain in May and June against mosquitoes per trap](figures/rain-vs-mosquitoes.png)
 
 ## Data
 
