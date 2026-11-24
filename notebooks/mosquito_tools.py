@@ -111,3 +111,21 @@ def load_releases(paths, key):
         raise ValueError(f"{repeats} rows repeat across files")
     print(f"{len(paths)} file(s), {len(combined)} rows")
     return combined
+def rain_scatter(ax, seasons, wet_mm, title):
+    """Spring rain against mosquitoes per trap, one labelled dot per summer, on `ax`.
+
+    Wet springs (`wet_mm` or more) are green, with a dashed line at the threshold.
+
+    Used in: chapter 3 and the README figure (03-story).
+    """
+    wet = is_wet(seasons, wet_mm)
+    ax.scatter(seasons["spring_precip_mm"], seasons["season_avg"],
+               c=wet.map({True: "#2f6f4f", False: "#9a9a92"}), s=60)
+    for year, row in seasons.iterrows():
+        ax.annotate(str(year), (row["spring_precip_mm"], row["season_avg"]),
+                    xytext=(5, 3), textcoords="offset points")
+    ax.axvline(wet_mm, color="#9a9a92", linestyle="--", linewidth=1)
+    ax.set_title(title)
+    ax.set_xlabel("Rain in May and June (mm)")
+    ax.set_ylabel("Mosquitoes per trap per count day")
+    return ax
